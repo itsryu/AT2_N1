@@ -35,7 +35,7 @@ int main(void) {
 			// Atribuindo os valores para a struct Artist;
 			readFile(file, artist, &numArtists);
 
-			// Limpando a tela e exibindo o menu;
+			// Limpando a tela e exibindo o menu principal;
 			clearScreen();
 			showMenu(file, artist, &numArtists);
 		}
@@ -76,6 +76,9 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 	switch (input) {
 		case 1: {
 			clearScreen();
+			addArtist(artist, num);
+			saveFile(file, artist, *num);
+			backToMenu(file, artist, num);
 			break;
 		}
 		case 2: {
@@ -109,6 +112,67 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 	}
 
 	free(artist);
+}
+
+static void addArtist(Artist* artist, int* num) {
+	if (*num >= LENGTH) {
+		printf("Lista de artistas chegou ao seu limite, remova algum artista para continuar.\n");
+		return;
+	} else {
+		printf("Nome do artista: ");
+		while (scanf(" %[^\n]", artist[*num].name) != 1) {
+			printf("Erro ao ler o nome do artista. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("Gênero musical: ");
+		while (scanf(" %[^\n]", artist[*num].gender) != 1) {
+			printf("Erro ao ler o gênero musical. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("Local de nascimento: ");
+		while (scanf(" %[^\n]", artist[*num].origin) != 1) {
+			printf("Erro ao ler o local de criação/nascimento. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("Quantidade de álbuns: ");
+		while (scanf("%d", &artist[*num].numAlbuns) != 1) {
+			printf("Erro ao ler a quantidade de álbuns. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		for (int i = 0; i < artist[*num].numAlbuns; i++) {
+			printf("%dº álbum: ", i + 1);
+
+			while (scanf(" %[^\n]", artist[*num].albuns[i]) != 1) {
+				printf("Erro ao ler o álbum. Tente novamente: ");
+				while (getchar() != '\n');
+			}
+		}
+
+		(*num)++;
+	}
+}
+
+static void saveFile(FILE* file, Artist* artist, int num) {
+	file = fopen(FILE_PATH, "w");
+
+	if (file == NULL) {
+		printf("Erro ao abrir o arquivo. Encerrando o programa...\n");
+		exit(1);
+	} else {
+		for (int i = 0; i < num; i++) {
+			fprintf(file, "%s\n%s\n%s\n", artist[i].name, artist[i].gender, artist[i].origin);
+
+			for (int j = 0; j < artist[i].numAlbuns; j++) {
+				fprintf(file, "%s\n", artist[i].albuns[j]);
+			}
+
+			fprintf(file, "===========\n");
+		}
+	}
 }
 
 static void showArtists(Artist* artist, int num) {

@@ -16,7 +16,7 @@ The Final Cut
 A Momentary Lapse of Reason 
 The Division Bell 
 The Endless River 
-==========
+===========
 Radiohead
 Rock Alternativo
 Abingdon, Oxfordshire, Inglaterra
@@ -29,7 +29,7 @@ Hail to the Thief
 In Rainbows 
 The King of Limbs 
 A Moon Shaped Pool 
-==========
+===========
 Marvin Gaye
 R&B
 Washington, D.C., E.U.A
@@ -50,7 +50,7 @@ I Want You
 Here, My Dear 
 In Our Lifetime 
 Midnight Love 
-==========
+===========
 Bob Dylan
 Folk
 Duluth, Minessota, E.U.A
@@ -94,7 +94,7 @@ Fallen Angels
 Triplicate 
 Rough and Rowdy Ways 
 Shadow Kingdom 
-==========
+===========
 Belchior
 MPB
 Sobral, CearÃ¡, Brasil
@@ -112,7 +112,7 @@ Divina ComÃ©dia Humana
 Baihuno 
 VÃ­cio Elegante 
 Autorretrato 
-==========
+===========
 Kendrick Lamar
 Hip Hop
 Compton, California, E.U.A.
@@ -121,13 +121,13 @@ Good Kid, M.A.A.D City
 To Pimp a Butterfly 
 Damn 
 Mr. Morale & the Big Steppers 
-==========
+===========
 Alabama Shakes
 Blues
 Athens, Alabama, E.U.A.
 Boys & Girls 
 Sound & Color 
-==========
+===========
 Kings of Leon
 Rock Alternativo
 Mt. Juliet, Tennessee, E.U.A.
@@ -139,12 +139,12 @@ Come Around Sundown
 Mechanical Bull 
 Walls 
 When You See Yourself 
-==========
+===========
 Tim Bernardes
 SÃ£o Paulo, SÃ£o Paulo, Brasil
 RecomeÃ§ar
 Mil Coisas InvisÃ­veis
-==========
+===========
 Pearl Jam
 Grunge
 Seattle, Washington, E.U.A.
@@ -159,7 +159,7 @@ Pearl Jam
 Backspacer 
 Lightning Bolt 
 Gigaton 
-==========
+===========
 MFDOOM
 Hip Hop
 Hounslow, London, Inglaterra
@@ -178,7 +178,7 @@ Key to the Kuffs
 NehruvianDoom 
 Czarface Meets Metal Face 
 Super What? 
-==========
+===========
 Frank Ocean
 R&B
 Long Beach, California, E.U.A.
@@ -186,7 +186,7 @@ Nostalgia, Ultra
 Channel Orange 
 Endless 
 Blonde 
-==========
+===========
 The Beatles
 Rock
 Liverpool, Inglaterra
@@ -203,7 +203,7 @@ The Beatles ("The White Album")
 Yellow Submarine 
 Abbey Road 
 Let It Be 
-==========
+===========
 JosÃ© GonzÃ¡lez
 Folk
 Gotemburgo, SuÃ©cia
@@ -211,11 +211,17 @@ Veneer
 In Our Nature
 Vestiges & Claws
 Local Valley
-==========
+===========
 American Football
 Emo
 Urbana, Illinois, E.U.A
 American Football (1999)
 American Football (2016)
 American Football (2019)
-==========
+===========
+teste nome
+teste genero
+teste local
+teste album 1
+teste album 2
+===========
