@@ -97,6 +97,7 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 		case 6: {
 			clearScreen();
 			showArtists(artist, *num);
+			backToMenu(file, artist, num);
 			break;
 		}
 		case 7: {
@@ -121,6 +122,13 @@ static void showArtists(Artist* artist, int num) {
 
 		printf("\n");
 	}
+}
+
+static void backToMenu(FILE* file, Artist* artist, int* num) {
+	system("pause");
+
+	clearScreen();
+	showMenu(file, artist, num);
 }
 
 static void configEnvironment() {
