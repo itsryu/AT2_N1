@@ -37,7 +37,7 @@ int main(void) {
 
 			// Limpando a tela e exibindo o menu;
 			clearScreen();
-			showMenu(file, artist);
+			showMenu(file, artist, &numArtists);
 		}
 	}
 
@@ -62,7 +62,7 @@ static void readFile(FILE* file, Artist* artist, int* num) {
 	}
 }
 
-static void showMenu(FILE* file, Artist* artist) {
+static void showMenu(FILE* file, Artist* artist, int* num) {
 	int input = 0;
 
 	printf("1. Inserir artista\n2. Remover artista\n3. Editar artista\n4. Buscar artista\n5. Buscar álbum\n6. Exibir informações\n7. Encerrar o programa\n\n");
@@ -96,6 +96,7 @@ static void showMenu(FILE* file, Artist* artist) {
 		}
 		case 6: {
 			clearScreen();
+			showArtists(artist, *num);
 			break;
 		}
 		case 7: {
@@ -107,6 +108,19 @@ static void showMenu(FILE* file, Artist* artist) {
 	}
 
 	free(artist);
+}
+
+static void showArtists(Artist* artist, int num) {
+	for (int i = 0; i < num; i++) {
+		printf("Nome: %s\nGênero: %s\nLocal de nascimento: %s\n", artist[i].name, artist[i].gender, artist[i].origin);
+
+		printf("Álbuns:\n");
+		for (int j = 0; j < artist[i].numAlbuns; j++) {
+			printf("%s\n", artist[i].albuns[j]);
+		}
+
+		printf("\n");
+	}
 }
 
 static void configEnvironment() {
