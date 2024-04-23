@@ -1,22 +1,3 @@
-Pink Floyd
-Rock Progressivo
-Londres, Inglaterra
-The Piper at the Gates of Dawn 
-A Saucerful of Secrets 
-More 
-Ummagumma 
-Atom Heart Mother 
-Meddle 
-Obscured by Clouds 
-The Dark Side of the Moon 
-Wish You Were Here 
-Animals 
-The Wall 
-The Final Cut 
-A Momentary Lapse of Reason 
-The Division Bell 
-The Endless River 
-===========
 Radiohead
 Rock Alternativo
 Abingdon, Oxfordshire, Inglaterra
@@ -29,71 +10,6 @@ Hail to the Thief
 In Rainbows 
 The King of Limbs 
 A Moon Shaped Pool 
-===========
-Marvin Gaye
-R&B
-Washington, D.C., E.U.A
-The Soulful Moods of Marvin Gaye 
-That Stubborn Kinda Fellow 
-When I'm Alone I Cry 
-Hello Broadway 
-How Sweet It Is to Be Loved by You 
-A Tribute to the Great Nat "King" Cole 
-Moods of Marvin Gaye 
-In the Groove 
-M.P.G. 
-That's the Way Love Is 
-What's Going On 
-Trouble Man 
-Let's Get It On 
-I Want You 
-Here, My Dear 
-In Our Lifetime 
-Midnight Love 
-===========
-Bob Dylan
-Folk
-Duluth, Minessota, E.U.A
-Bob Dylan 
-The Freewheelin' Bob Dylan 
-The Times They Are a-Changin' 
-Another Side of Bob Dylan 
-Bringing It All Back Home 
-Highway 61 Revisited 
-Blonde on Blonde 
-John Wesley Harding 
-Nashville Skyline 
-Self Portrait 
-New Morning 
-Pat Garrett & Billy the Kid 
-Dylan 
-Planet Waves 
-Blood on the Tracks 
-The Basement Tapes 
-Desire 
-Street-Legal 
-Slow Train Coming 
-Saved 
-Shot of Love 
-Infidels 
-Empire Burlesque 
-Knocked Out Loaded 
-Down in the Groove 
-Oh Mercy 
-Under the Red Sky 
-Good as I Been to You 
-World Gone Wrong 
-Time Out of Mind 
-"Love and Theft" 
-Modern Times 
-Together Through Life 
-Christmas in the Heart 
-Tempest 
-Shadows in the Night 
-Fallen Angels 
-Triplicate 
-Rough and Rowdy Ways 
-Shadow Kingdom 
 ===========
 Belchior
 MPB
@@ -223,5 +139,4 @@ teste nome
 teste genero
 teste local
 teste album 1
-teste album 2
 ===========

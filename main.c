@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <locale.h>
 
 #include "artists.h"
@@ -38,10 +39,17 @@ int main(void) {
 			// Limpando a tela e exibindo o menu principal;
 			clearScreen();
 			showMenu(file, artist, &numArtists);
+
+			// Liberando a memória alocada;
+			free(artist);
 		}
 	}
 
+	// Fechando o arquivo;
 	fclose(file);
+
+	clearScreen();
+	printf("Programa encerrado com sucesso!\n");
 
 	return 0;
 }
@@ -83,6 +91,9 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 		}
 		case 2: {
 			clearScreen();
+			removeArtist(artist, num);
+			saveFile(file, artist, *num);
+			backToMenu(file, artist, num);
 			break;
 		}
 		case 3: {
@@ -104,10 +115,8 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 			break;
 		}
 		case 7: {
-			fclose(file);
-			free(artist);
-			exit(0);
-			break;
+			// Retornando a função main e encerrando o programa devidamente;
+			return;
 		}
 	}
 
@@ -156,6 +165,36 @@ static void addArtist(Artist* artist, int* num) {
 	}
 }
 
+static void removeArtist(Artist* artist, int* num) {
+	char name[LENGTH] = { "" };
+	int last_position = -1;
+
+	printf("Nome do artista a ser removido: ");
+	while (scanf(" %[^\n]", name) != 1) {
+		printf("Erro ao ler o nome do artista. Tente novamente: ");
+		while (getchar() != '\n');
+	}
+
+	for (int i = 0; i < *num; i++) {
+		if(strcmp(artist[i].name, name) == 0) {
+			last_position = i;
+			break;
+		}
+	}
+
+	if (last_position != -1) {
+		for (int i = last_position; i < *num; i++) {
+			artist[i] = artist[i + 1];
+		}
+
+		(*num)--;
+
+		printf("Artista removido com sucesso.\n");
+	} else {
+		printf("Artista não encontrado na lista. Adicione-o.\n");
+	}
+}
+
 static void saveFile(FILE* file, Artist* artist, int num) {
 	file = fopen(FILE_PATH, "w");
 
@@ -172,6 +211,8 @@ static void saveFile(FILE* file, Artist* artist, int num) {
 
 			fprintf(file, "===========\n");
 		}
+
+		fclose(file);
 	}
 }
 
