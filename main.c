@@ -30,13 +30,32 @@ int main(void) {
 			printf("Erro ao alocar a memória. Encerrando o programa...\n");
 			exit(1);
 		} else {
-			// do something
+			int numArtists = 0;
+
+			// Atribuindo os valores para a struct Artist;
+			readFile(file, artist, &numArtists);
 		}
 	}
 
 	fclose(file);
 
 	return 0;
+}
+
+static void readFile(FILE* file, Artist* artist, int* num) {
+	while (fscanf(file, "%[^\n]\n%[^\n]\n%[^\n]\n", artist[*num].name, artist[*num].gender, artist[*num].origin) == 3) {
+		artist[*num].numAlbuns = 0;
+
+		while (fscanf(file, "%[^\n]\n", artist[*num].albuns[artist[*num].numAlbuns]) == 1) {
+			if (strstr(artist[*num].albuns[artist[*num].numAlbuns], "==========") != NULL) {
+				break;
+			}
+
+			artist[*num].numAlbuns++;
+		}
+
+		(*num)++;
+	}
 }
 
 static void configEnvironment() {
