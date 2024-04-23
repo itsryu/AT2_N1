@@ -34,6 +34,10 @@ int main(void) {
 
 			// Atribuindo os valores para a struct Artist;
 			readFile(file, artist, &numArtists);
+
+			// Limpando a tela e exibindo o menu;
+			clearScreen();
+			showMenu(file, artist);
 		}
 	}
 
@@ -56,6 +60,53 @@ static void readFile(FILE* file, Artist* artist, int* num) {
 
 		(*num)++;
 	}
+}
+
+static void showMenu(FILE* file, Artist* artist) {
+	int input = 0;
+
+	printf("1. Inserir artista\n2. Remover artista\n3. Editar artista\n4. Buscar artista\n5. Buscar álbum\n6. Exibir informações\n7. Encerrar o programa\n\n");
+	printf("Escolha uma opção: ");
+
+	while (scanf("%d", &input) != 1 && input < 1 || input > 7) {
+		printf("Opção inválida. Escolha uma opção válida: ");
+		while (getchar() != '\n');
+	}
+
+	switch (input) {
+		case 1: {
+			clearScreen();
+			break;
+		}
+		case 2: {
+			clearScreen();
+			break;
+		}
+		case 3: {
+			clearScreen();
+			break;
+		}
+		case 4: {
+			clearScreen();
+			break;
+		}
+		case 5: {
+			clearScreen();
+			break;
+		}
+		case 6: {
+			clearScreen();
+			break;
+		}
+		case 7: {
+			fclose(file);
+			free(artist);
+			exit(0);
+			break;
+		}
+	}
+
+	free(artist);
 }
 
 static void configEnvironment() {
