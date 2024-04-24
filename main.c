@@ -98,6 +98,9 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 		}
 		case 3: {
 			clearScreen();
+			editArtist(artist, *num);
+			saveFile(file, artist, *num);
+			backToMenu(file, artist, num);
 			break;
 		}
 		case 4: {
@@ -152,6 +155,7 @@ static void addArtist(Artist* artist, int* num) {
 			while (getchar() != '\n');
 		}
 
+		printf("\n");
 		for (int i = 0; i < artist[*num].numAlbuns; i++) {
 			printf("%dº álbum: ", i + 1);
 
@@ -167,7 +171,7 @@ static void addArtist(Artist* artist, int* num) {
 
 static void removeArtist(Artist* artist, int* num) {
 	char name[LENGTH] = { "" };
-	int last_position = -1;
+	int index = -1;
 
 	printf("Nome do artista a ser removido: ");
 	while (scanf(" %[^\n]", name) != 1) {
@@ -177,13 +181,13 @@ static void removeArtist(Artist* artist, int* num) {
 
 	for (int i = 0; i < *num; i++) {
 		if(strcmp(artist[i].name, name) == 0) {
-			last_position = i;
+			index = i;
 			break;
 		}
 	}
 
-	if (last_position != -1) {
-		for (int i = last_position; i < *num; i++) {
+	if (index != -1) {
+		for (int i = index; i < *num; i++) {
 			artist[i] = artist[i + 1];
 		}
 
@@ -192,6 +196,62 @@ static void removeArtist(Artist* artist, int* num) {
 		printf("Artista removido com sucesso.\n");
 	} else {
 		printf("Artista não encontrado na lista. Adicione-o.\n");
+	}
+}
+
+static void editArtist(Artist* artist, int num) {
+	char name[LENGTH] = { "" };
+	int index = -1;
+
+	printf("Nome do artista a ser editado: ");
+	while (scanf(" %[^\n]", name) != 1) {
+		printf("Erro ao ler o nome do artista. Tente novamente: ");
+		while (getchar() != '\n');
+	}
+
+	for (int i = 0; i < num; i++) {
+		if (strcmp(artist[i].name, name) == 0) {
+			index = i;
+			break;
+		}
+	}
+
+	if (index != -1) {
+		printf("Novo nome do artista: ");
+		while (scanf(" %[^\n]", artist[index].name) != 1) {
+			printf("Erro ao ler o nome do artista. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("Gênero musical: ");
+		while (scanf(" %[^\n]", artist[index].gender) != 1) {
+			printf("Erro ao ler o gênero musical. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("Local de nascimento: ");
+		while (scanf(" %[^\n]", artist[index].origin) != 1) {
+			printf("Erro ao ler o local de criação/nascimento. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("Quantidade de álbuns: ");
+		while (scanf("%d", &artist[index].numAlbuns) != 1) {
+			printf("Erro ao ler a quantidade de álbuns. Tente novamente: ");
+			while (getchar() != '\n');
+		}
+
+		printf("\n");
+		for (int i = 0; i < artist[index].numAlbuns; i++) {
+			printf("%dº álbum: ", i + 1);
+
+			while (scanf(" %[^\n]", artist[index].albuns[i]) != 1) {
+				printf("Erro ao ler o álbum. Tente novamente: ");
+				while (getchar() != '\n');
+			}
+		}
+	} else {
+		printf("Artista não encontrado na lista...\n");
 	}
 }
 
