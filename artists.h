@@ -1,6 +1,17 @@
 #pragma once
 
-typedef struct Artist Artist;
+#include <stdio.h>
+
+#define LENGTH 100
+#define FILE_PATH "./artistas.txt"
+
+typedef struct {
+	char name[LENGTH];
+	char gender[LENGTH];
+	char origin[LENGTH];
+	char albuns[LENGTH][LENGTH];
+	int numAlbuns;
+} Artist;
 
 static void configEnvironment();
 static void clearScreen();
@@ -11,6 +22,9 @@ static void backToMenu(FILE* file, Artist* artist, int* num);
 static void addArtist(Artist* artist, int* num);
 static void removeArtist(Artist* artist, int* num);
 static void editArtist(Artist* artist, int num);
-int findArtist(Artist* artist, int left, int right, char* name);
+static void findArtist(Artist* artist, int left, int right, char* name);
 static void findAlbum(Artist* artist, int num);
 static void saveFile(FILE* file, Artist* artist, int num);
+static void swap(Artist* a, Artist* b);
+static int partition(Artist* artist, int left, int right);
+static void quickSort(Artist* artist, int left, int right);

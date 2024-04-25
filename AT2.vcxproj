@@ -135,7 +135,7 @@
     <ClInclude Include="artists.h" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="artists.txt" />
+    <Text Include="artistas.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
