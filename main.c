@@ -61,6 +61,11 @@ static void readFile(FILE* file, Artist* artist, int* num) {
 		while (fscanf(file, "%[^\n]\n", artist[*num].albuns[artist[*num].numAlbuns]) == 1) {
 			if (strstr(artist[*num].albuns[artist[*num].numAlbuns], "==========") != NULL) break;
 
+			// Verificando se o último char é um espaço vazio:
+			if (artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] == ' ') {
+				artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] = '\0';
+			}
+
 			artist[*num].numAlbuns++;
 		}
 
@@ -112,7 +117,7 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 			while (getchar() != '\n');
 		}
 
-		const int pos = findArtist(artist, 0, *num, name);
+		const int pos = findArtist(artist, 0, *num - 1, name);
 
 		if (pos != -1) {
 			printf("Artista encontrado:\n");
@@ -132,6 +137,8 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 	}
 	case 5: {
 		clearScreen();
+		findAlbum(artist, *num);
+		backToMenu(file, artist, num);
 		break;
 	}
 	case 6: {
@@ -216,8 +223,7 @@ static void removeArtist(Artist* artist, int* num) {
 		(*num)--;
 
 		printf("Artista removido com sucesso.\n");
-	}
-	else {
+	} else {
 		printf("Artista não encontrado na lista. Adicione-o.\n");
 	}
 }
@@ -298,14 +304,37 @@ int findArtist(Artist* artist, int left, int right, char* name) {
 	return -1;
 }
 
+static void findAlbum(Artist* artist, int num) {
+	char name[LENGTH] = { " " };
+	int found = 0;
+
+	printf("Insira o nome do álbum: ");
+	while (scanf(" %[^\n]", name) != 1) {
+		printf("Erro ao ler o nome do álbum, tente novamente: ");
+		while (getchar() != '\n');
+	}
+
+	for (int i = 0; i < num; i++) {
+		for (int j = 0; j < artist[i].numAlbuns; j++) {
+			if (strcmp(name, artist[i].albuns[j]) == 0) {
+				printf("Álbum %s do artista %s encontrado com sucesso.\n", artist[i].albuns[j], artist[i].name);
+				found = 1;
+			}
+		}
+	}
+
+	if (!found) {
+		printf("Álbum não encontrado.\n");
+	}
+}
+
 static void saveFile(FILE* file, Artist* artist, int num) {
 	file = fopen(FILE_PATH, "w");
 
 	if (file == NULL) {
 		printf("Erro ao abrir o arquivo. Encerrando o programa...\n");
 		exit(1);
-	}
-	else {
+	} else {
 		for (int i = 0; i < num; i++) {
 			fprintf(file, "%s\n%s\n%s\n", artist[i].name, artist[i].gender, artist[i].origin);
 
@@ -322,14 +351,14 @@ static void saveFile(FILE* file, Artist* artist, int num) {
 
 static void showArtists(Artist* artist, int num) {
 	for (int i = 0; i < num; i++) {
-		printf("Nome: %s\nGênero: %s\nLocal de nascimento: %s\n", artist[i].name, artist[i].gender, artist[i].origin);
+		printf("Nome: %s\nGênero: %s\nLocal de nascimento: %s\nNº total de álbuns: %d\n\n", artist[i].name, artist[i].gender, artist[i].origin, artist[i].numAlbuns);
 
 		printf("Álbuns:\n");
 		for (int j = 0; j < artist[i].numAlbuns; j++) {
 			printf("%s\n", artist[i].albuns[j]);
 		}
 
-		printf("\n");
+		printf("\n======================\n\n");
 	}
 }
 
@@ -346,9 +375,9 @@ static void configEnvironment() {
 }
 
 static void clearScreen() {
-#ifdef _WIN32
-	system("cls");
-#elif __linux__
-	system("clear");
-#endif
+	#ifdef _WIN32
+		system("cls");
+	#elif __linux__
+		system("clear");
+	#endif
 }
