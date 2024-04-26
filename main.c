@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "malloc.h"
 #include <string.h>
 #include <locale.h>
 
@@ -60,10 +61,10 @@ static int partition(Artist* artist, int left, int right) {
 	int i = left - 1;
 
 	for(int j = left; j < right; j++) {
-		Artist* artistA = &artist[j];
-		Artist* artistB = &pivot;
+		Artist* A = &artist[j];
+		Artist* B = &pivot;
 
-		if(strcmp(artistA->name, artistB->name) <= 0) {
+		if(strcmp(A->name, B->name) <= 0) {
 			i++;
 			swap(&artist[i], &artist[j]);
 		}
@@ -92,7 +93,7 @@ static void readFile(FILE* file, Artist* artist, int* num) {
 			// Verificando se o álbum é o último da lista;
 			if(strstr(artist[*num].albuns[artist[*num].numAlbuns], "==========") != NULL) break;
 
-			// Verificando se o último char é um espaço vazio:
+			// Verificando se o último char é um espaço vazio (pois tem espaços vazios no arquivo artistas.txt):
 			if(artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] == ' ') {
 				artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] = '\0';
 			}
@@ -118,64 +119,64 @@ static void showMenu(FILE* file, Artist* artist, int* num) {
 
 	switch(input) {
 		case 1:
-			{
-				clearScreen();
-				addArtist(artist, num);
-				saveFile(file, artist, *num);
-				backToMenu(file, artist, num);
-				break;
-			}
+		{
+			clearScreen();
+			addArtist(artist, num);
+			saveFile(file, artist, *num);
+			backToMenu(file, artist, num);
+			break;
+		}
 		case 2:
-			{
-				clearScreen();
-				removeArtist(artist, num);
-				saveFile(file, artist, *num);
-				backToMenu(file, artist, num);
-				break;
-			}
+		{
+			clearScreen();
+			removeArtist(artist, num);
+			saveFile(file, artist, *num);
+			backToMenu(file, artist, num);
+			break;
+		}
 		case 3:
-			{
-				clearScreen();
-				editArtist(artist, *num);
-				saveFile(file, artist, *num);
-				backToMenu(file, artist, num);
-				break;
-			}
+		{
+			clearScreen();
+			editArtist(artist, *num);
+			saveFile(file, artist, *num);
+			backToMenu(file, artist, num);
+			break;
+		}
 		case 4:
-			{
-				clearScreen();
-				char name[LENGTH] = { "" };
+		{
+			clearScreen();
+			char name[LENGTH] = { "" };
 
-				printf("Nome do artista/banda a ser procurado: ");
-				while(scanf(" %[^\n]", name) != 1) {
-					printf("Erro ao ler o nome do artista/banda. Tente novamente: ");
-					while(getchar() != '\n');
-				}
-
-				findArtist(artist, 0, *num - 1, name);
-				backToMenu(file, artist, num);
-				break;
+			printf("Nome do artista/banda a ser procurado: ");
+			while(scanf(" %[^\n]", name) != 1) {
+				printf("Erro ao ler o nome do artista/banda. Tente novamente: ");
+				while(getchar() != '\n');
 			}
+
+			findArtist(artist, 0, *num - 1, name);
+			backToMenu(file, artist, num);
+			break;
+		}
 		case 5:
-			{
-				clearScreen();
-				findAlbum(artist, *num);
-				backToMenu(file, artist, num);
-				break;
-			}
+		{
+			clearScreen();
+			findAlbum(artist, *num);
+			backToMenu(file, artist, num);
+			break;
+		}
 		case 6:
-			{
-				clearScreen();
-				showArtists(artist, *num);
-				backToMenu(file, artist, num);
-				break;
-			}
+		{
+			clearScreen();
+			showArtists(artist, *num);
+			backToMenu(file, artist, num);
+			break;
+		}
+		// Retornando a função main e encerrando o programa devidamente;
 		case 7:
-			{
-	   // Retornando a função main e encerrando o programa devidamente;
-				saveFile(file, artist, *num);
-				return;
-			}
+		{
+			saveFile(file, artist, *num);
+			return;
+		}
 	}
 }
 
@@ -188,6 +189,7 @@ static void addArtist(Artist* artist, int* num) {
 		int pos = 0;
 
 		// Obs: nome deve se iniciar em letra maiúscula para ser ordenado corretamente;
+		// Possível solução: criar uma função para realizar a capitalização da primeira letra do nome do artista;
 		printf("Nome do artista/banda: ");
 		while(scanf(" %[^\n]", newArtist->name) != 1) {
 			printf("Erro ao ler o nome do artista. Tente novamente: ");
@@ -382,14 +384,14 @@ static void findAlbum(Artist* artist, int num) {
 
 				switch(input) {
 					case 1:
-						{
-							clearScreen();
-							findArtist(artist, 0, num - 1, artist[i].name);
-						}
+					{
+						clearScreen();
+						findArtist(artist, 0, num - 1, artist[i].name);
+					}
 					case 2:
-						{
-							return;
-						}
+					{
+						return;
+					}
 				}
 
 				break;
@@ -450,9 +452,9 @@ static void configEnvironment() {
 }
 
 static void clearScreen() {
-#ifdef _WIN32
+	#ifdef _WIN32
 	system("cls");
-#elif __linux__
+	#elif __linux__
 	system("clear");
-#endif
+	#endif
 }
