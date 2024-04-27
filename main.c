@@ -48,6 +48,28 @@ int main(void) {
 	return 0;
 }
 
+static void readFile(FILE* file, Artist* artist, int* num) {
+	// Atribuindo o nome, gênero, e local de nascimento para a struct Artist;
+	while(fscanf(file, "%[^\n]\n%[^\n]\n%[^\n]\n", artist[*num].name, artist[*num].gender, artist[*num].origin) == 3) {
+		artist[*num].numAlbuns = 0;
+
+		// Atribuindo os albuns para a struct Artist;
+		while(fscanf(file, "%[^\n]\n", artist[*num].albuns[artist[*num].numAlbuns]) == 1) {
+			// Verificando se o álbum é o último da lista;
+			if(strstr(artist[*num].albuns[artist[*num].numAlbuns], "==========") != NULL) break;
+
+			// Verificando se o último char é um espaço vazio (pois tem espaços vazios no arquivo artistas.txt):
+			if(artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] == ' ') {
+				artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] = '\0';
+			}
+
+			artist[*num].numAlbuns++;
+		}
+
+		(*num)++;
+	}
+}
+
 // Criando uma função para realizar a troca pois a função partition() está acumulando uma pilha muito grande de bytes;
 static void swap(Artist* a, Artist* b) {
 	Artist temp = *a;
@@ -80,28 +102,6 @@ static void quickSort(Artist* artist, int left, int right) {
 
 		quickSort(artist, left, p - 1);
 		quickSort(artist, p + 1, right);
-	}
-}
-
-static void readFile(FILE* file, Artist* artist, int* num) {
-	// Atribuindo o nome, gênero, e local de nascimento para a struct Artist;
-	while(fscanf(file, "%[^\n]\n%[^\n]\n%[^\n]\n", artist[*num].name, artist[*num].gender, artist[*num].origin) == 3) {
-		artist[*num].numAlbuns = 0;
-
-		// Atribuindo os albuns para a struct Artist;
-		while(fscanf(file, "%[^\n]\n", artist[*num].albuns[artist[*num].numAlbuns]) == 1) {
-			// Verificando se o álbum é o último da lista;
-			if(strstr(artist[*num].albuns[artist[*num].numAlbuns], "==========") != NULL) break;
-
-			// Verificando se o último char é um espaço vazio (pois tem espaços vazios no arquivo artistas.txt):
-			if(artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] == ' ') {
-				artist[*num].albuns[artist[*num].numAlbuns][strlen(artist[*num].albuns[artist[*num].numAlbuns]) - 1] = '\0';
-			}
-
-			artist[*num].numAlbuns++;
-		}
-
-		(*num)++;
 	}
 }
 
