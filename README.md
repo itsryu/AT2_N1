@@ -31,7 +31,10 @@
                 <strong>Compilação:</strong> Vá para a pasta onde o projeto foi clonado e compile o programa utilizando o GCC (GNU Compiler Collection):
                 <pre><code>gcc main.c -o gerenciador</code></pre>
             </li>
-            <li><strong>Execução:</strong> Após a compilação, execute o arquivo 'gerenciador.exe' para inicializar o programa.</li>
+            <li>
+                <strong>Execução:</strong> Após a compilação, execute o arquivo 'gerenciador.exe' para inicializar o programa.
+                <pre><code>gerenciador.exe</code></pre>
+            </li>
             <li><strong>Interagindo com o programa:</strong> Siga as instruções do menu para realizar as ações desejadas.</li>
         </ol>
         <h2>Ferramentas de desenvolvimento utilizadas</h2>
